@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_Health_Segmented : MonoBehaviour {
     // InstaDeath objects should be tagged "Death" and set as a trigger
@@ -9,7 +10,7 @@ public class Player_Health_Segmented : MonoBehaviour {
 
     private GameObject respawn;
 
-    private int playerScore;
+    static private int playerScore;
    
 
     [Tooltip("The score value of a coin or pickup.")]
@@ -35,8 +36,9 @@ public class Player_Health_Segmented : MonoBehaviour {
     void Start()
     {
         respawn = GameObject.FindGameObjectWithTag("Respawn");
-        playerScore = 0;
-        scoreText.text = playerScore.ToString("D4");
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+            playerScore = 0;
+        scoreText.text = "Coins: " + playerScore.ToString("D2");
 
     }
 
@@ -127,6 +129,6 @@ public class Player_Health_Segmented : MonoBehaviour {
     public void AddPoints(int amount)
     {
         playerScore += amount;
-        scoreText.text = playerScore.ToString("D4");
+        scoreText.text = "Coins: " + playerScore.ToString("D2");
     }
 }

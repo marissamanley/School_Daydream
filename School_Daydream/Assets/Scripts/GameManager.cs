@@ -11,17 +11,21 @@ public class GameManager : MonoBehaviour
     public GameObject screen;
     public bool hasStarted = false;
     public int arrowNum = 19;
+    public int points;
 
     public Text strikeText;
     public Text infoText;
     public GameObject whiteBr;
+    public GameObject CoinAccess;
     public Button go;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Wait());
         instance = this;
+        points = CoinAccess.GetComponent<Player_Health_Segmented>().GetScore();
         strikes = 5;
+        strikeText.text = "Lives: " + strikes;
     }
 
     IEnumerator Wait()
